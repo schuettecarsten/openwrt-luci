@@ -676,10 +676,16 @@ return view.extend({
 		);
 		o.placeholder = '/etc/dnsmasq.servers';
 
-		s.taboption('forward', form.Flag, 'add_mac',
+		o = s.taboption('forward', form.Value, 'add_mac',
 			_('Add requestor MAC'),
 			_('Add the MAC address of the requestor to DNS queries which are forwarded upstream.'));
-
+		o.optional = true;
+		o.rmempty = false;
+		o.value('', _('off'));
+		o.value('enabled', _('Enabled'));
+		o.value('base64');
+		o.value('text');
+	
 		s.taboption('forward', form.Flag, 'strip_mac',
 			_('Remove MAC address before forwarding query'),
 			_('Remove any MAC address information already in downstream queries before forwarding upstream.'));
